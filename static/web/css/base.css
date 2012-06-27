@@ -1,0 +1,35 @@
+body {
+	background-color: #CEE3F6;
+	margin:0px;
+	padding: 0px;
+}
+#container{
+	background-color: #FFFFFF;
+	width: 960px;
+	height: 700px;
+	margin: 0px auto;
+	padding: 5px;
+}
+header {
+	text-align: center;
+	padding: 10px;
+	background-color: #8258FA;
+	color: #FFFFFF;
+}
+section {
+	padding: 10px;
+}
+article {
+	width: 500px;
+	padding: 5px;
+	margin: 5px;
+}
+h1 {
+	font-size: 30px;
+}
+.esqred {
+	-webkit-border-radius:  7px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	border:1px solid #555555;
+}
