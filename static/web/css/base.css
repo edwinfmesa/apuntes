@@ -9,6 +9,7 @@ body {
 	height: 700px;
 	margin: 0px auto;
 	padding: 5px;
+	overflow: hidden;
 }
 header {
 	text-align: center;
@@ -16,8 +17,17 @@ header {
 	background-color: #8258FA;
 	color: #FFFFFF;
 }
+nav {
+	padding: 10px;
+	width: 200px;
+	height: auto;
+	float: left;
+}
 section {
 	padding: 10px;
+	width: auto;
+	height: auto;
+	float: left;
 }
 article {
 	width: 500px;

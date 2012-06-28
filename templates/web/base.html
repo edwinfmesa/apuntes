@@ -1,0 +1,32 @@
+{% load static %} {% get_static_prefix as STATIC_PREFIX %}
+<!DOCTYPE>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/h5bp_start.css" />
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/base.css" />
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/h5bp_end.css" />
+		{% block style %} {% endblock %}
+		<script src="{{ STATIC_PREFIX }}web/js/libs/modernizr-2.0.6.min.js"></script>
+		{% block jslink %} {% endblock %}
+		<title>Apuntes</title>
+	</head>
+	<body>
+		<div id="container">
+			<header><h1>Apuntes -  - Python - Django - etc </h1></header>
+			<nav id="nav">
+				{% include "web/menu.html" %}
+			</nav>
+			<section id="section">
+			{% block body %}{% endblock %}
+			</section>
+		</div>
+		<script src="{{ STATIC_PREFIX }}web/js/libs/jquery-1.7.1.min.js"></script>
+	</body>
+</html>
+<script>
+$(document).ready(function() {
+	  /* $("#tres").css('color','#FF00EE');
+	   $("#tres").css('background-color','red'); */
+	});
+</script>
