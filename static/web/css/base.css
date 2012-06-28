@@ -1,3 +1,10 @@
+a {text-decoration: none}
+a:link {text-decoration: none}
+a:visited {text-decoration: none}
+a:active {text-decoration: none}
+a:hover {text-decoration: underline; color: red;}
+
+
 body {
 	background-color: #CEE3F6;
 	margin:0px;
@@ -6,7 +13,8 @@ body {
 #container{
 	background-color: #FFFFFF;
 	width: 960px;
-	height: 700px;
+	min-height: 400px;
+	height: auto;
 	margin: 0px auto;
 	padding: 5px;
 	overflow: hidden;
@@ -17,11 +25,27 @@ header {
 	background-color: #8258FA;
 	color: #FFFFFF;
 }
+footer {
+	text-align: center;
+	padding: 5px;
+/*	padding: 10px;*/
+	background-color: #BDA6FB;
+/*	color: #FFFFFF;		*/
+/*	border: 1px solid blue;*/
+	clear: both;
+	height: 40px;
+}
 nav {
+	
 	padding: 10px;
-	width: 200px;
+	width: 250px;
 	height: auto;
 	float: left;
+}
+nav ul li {
+	margin: 10px 10px;
+	padding: 5px auto 3px auto;
+	border-bottom:0.5px solid #8258FA;
 }
 section {
 	padding: 10px;
@@ -30,7 +54,7 @@ section {
 	float: left;
 }
 article {
-	width: 500px;
+	width: 630px;
 	padding: 5px;
 	margin: 5px;
 }
