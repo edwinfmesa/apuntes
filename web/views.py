@@ -1,8 +1,11 @@
 from django.shortcuts import render_to_response
+from web.models import generales, apuntes
 
 #funcion basica que recibe una solicitud y carga un html
 def home(request):
-    return render_to_response('web/home.html', None)
+    p = generales.objects.order_by("fecha")
+    q = apuntes.objects.order_by("fecha")
+    return render_to_response('web/home.html', {'datos':  p, "apuntes": q})
 
 def enlaces(request,var):
 #    if var != None:

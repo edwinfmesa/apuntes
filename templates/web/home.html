@@ -17,6 +17,22 @@
 			&lt;/html&gt;</pre>
 		
 	</p></article>
+	{% for dato in datos %}
+	<article class="esqred"><h2>Titulo: {{ dato.titulo }}</h2>
+		<p><h3>Contenido:</h3>
+		{{ dato.texto }}<br /><br />
+		fecha: {{ dato.fecha}}
+		</p>
+	</article>
+	{% endfor %}
+	{% for apunte in apuntes %}
+	<article class="esqred"><h2>Titulo: {{ apunte.titulo }}</h2>
+		<p><h3>Contenido:</h3>
+		{{ apunte.texto }}<br /><br />
+		fecha: {{ apunte.fecha}}
+		</p>
+	</article>
+	{% endfor %}
 	<article class="esqred"><p>Tambien puede tener apuntes personales de direcciones que deba guardar para tener acceso desde cualquier parte </p></article>
 	<article class="esqred"><p>Tambien puede tener apuntes personales de direcciones que deba guardar para tener acceso desde cualquier parte </p></article>
 	<article class="esqred"><p>Tambien puede tener apuntes personales de direcciones que deba guardar para tener acceso desde cualquier parte </p></article>	
