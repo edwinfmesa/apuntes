@@ -1,0 +1,19 @@
+#article_form{
+	background-color: #DFF2F8;
+}
+#form {
+	margin: 10px auto auto 10px;
+	padding: 5px auto 5px 15px;
+}
+#form input, #form textarea {
+/*	background-color: blue;*/
+	-webkit-border-radius:  5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+/*	border:1px solid #555555;*/
+}
+.submit{
+	margin: 5px auto 10px 100px;
+}
+
+	

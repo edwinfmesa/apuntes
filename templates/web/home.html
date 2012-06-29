@@ -1,28 +1,10 @@
 {% extends "web/base.html" %}
-{% block style %}<link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web.com/css.css" />{% endblock %}
-{% block jslink %}<script src="http://web.com/web/js/libs/modernizr-2.0.6.min.js"></script>{% endblock %}
+{% block style %}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/form.css" />
+{% endblock %}
+{% block jslink %}<script src=""></script>{% endblock %}
 {%block body%}
-    <article class="esqred">
-    	{% if info_enviado %}
-    		<h3>Gracias por enviar el formulario</h3>
-    		<p>Los datos ingresados fueron:</p>
-    		<h4>Email</h4>
-    		{{ email }}
-    		<h4>Titulo</h4>
-    		{{ titulo }}
-    		<h4>Texto</h4>
-    		{{ texto }}
-    	{% else %}
-    		LLena el siguiente formulario
-	    	<form name="Apuntes" action="." method="POST" >
-		    	{% csrf_token %}
-		    	{{ form.as_p }}
-		    	<input type="submit" name="submit" id="id_submit" />
-	    	</form>
-    	{% endif %}
-    	
-    </article>
-	<article class="esqred"><p>
+    <article class="esqred"><p>
 		<pre class="brush: html">
 			&lt;!DOCTYPE&gt;
 			&lt;html&gt;
@@ -36,19 +18,19 @@
 			&lt;/html&gt;</pre>
 		
 	</p></article>
+	{% for apunte in apuntes %}
+	<article class="esqred" style="overflow:hidden"><h2 style="float: left; margin: 5px auto 10px 5px;">{{ apunte.titulo }}</h2>  <span style="float:right; margin: 10px 5px auto auto;">{{ apunte.fecha}}</span>
+		<p style="clear: both; margin: 0px 5px 5px 10px;">
+		{{ apunte.texto }}<br /><br />
+		
+		</p>
+	</article>
+	{% endfor %}
 	{% for dato in datos %}
 	<article class="esqred"><h2>Titulo: {{ dato.titulo }}</h2>
 		<p><h3>Contenido:</h3>
 		{{ dato.texto }}<br /><br />
 		fecha: {{ dato.fecha}}
-		</p>
-	</article>
-	{% endfor %}
-	{% for apunte in apuntes %}
-	<article class="esqred"><h2>Titulo: {{ apunte.titulo }}</h2>
-		<p><h3>Contenido:</h3>
-		{{ apunte.texto }}<br /><br />
-		fecha: {{ apunte.fecha}}
 		</p>
 	</article>
 	{% endfor %}
@@ -64,5 +46,25 @@
 				}</pre>
 		 </p></article>
 	<article class="esqred"><p>Bueno, al parecer con esto ya puedo comenzar a trabajar, jeje </p></article>
-
+	<article class="esqred" id="article_form">
+    	{% if info_enviado %}
+    		<h3>El Apunte ha sido Gueradado correctamente.<a href="{% url web.views.home %}">Agregar Otro</a></h3>
+<!--    		<p>Los datos ingresados fueron:</p>-->
+<!--    		<h4>Email</h4>-->
+<!--    		{{ email }}-->
+<!--    		<h4>Titulo</h4>-->
+<!--    		{{ titulo }}-->
+<!--    		<h4>Texto</h4>-->
+<!--    		{{ texto }}-->
+    	{% else %}
+    		<div id="form">
+    			<h3>LLena el siguiente formulario para agregar un apunte.</h3>
+		    	<form name="Apuntes" action="." method="POST" >
+			    	{% csrf_token %}
+			    	{{ form.as_p }}
+			    	<input type="submit" name="submit" id="id_submit" class="submit"/>
+		    	</form>
+	    	</div>
+    	{% endif %}
+    </article>
 {% endblock%}
