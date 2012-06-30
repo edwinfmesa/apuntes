@@ -11,6 +11,10 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
+#Configuaracion para enviar correo desde Gmail
+from django.core.mail import EmailMultiAlternatives  #Enviamos HTML
+
+
 #funcion basica que recibe una solicitud y carga un html
 def home(request):
     p = generales.objects.order_by("-fecha")
@@ -34,6 +38,14 @@ def home(request):
             }
             query = apuntes(titulo= df['titulo'], fecha = datetime.datetime.now() , texto = df['texto']+' email: '+df['email'], )
             query.save()
+            
+            #configuracion para enviar correo via GMAIL
+            to_admin = 'edwinfmesa@hotmail.com'
+            html_content = 'Informacion recibida <br><br> Mensaje <br><br>%s <br><br>Desde: %s'%(df['texto'],df['email'])
+            msg = EmailMultiAlternatives('Correo de ccontacto %s'%(df['titulo']), html_content, 'from@server.com', [to_admin])
+            msg.attach_alternative(html_content, 'text/html') #deffinimos el ccontenido como HTML
+            msg.send() #Enviamos el correo
+            
     else:
         df = {}
         form = Apuntes()
