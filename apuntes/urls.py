@@ -9,6 +9,11 @@ urlpatterns = patterns('',
     url(r'^enlaces/(?P<var>.+?)/?$', 'web.views.enlaces'),
     url(r'^instalaciones/', 'web.views.instalaciones'),
     url(r'^update/', 'github.views.update'),
+    url(r'^usuario/nuevo/?$', 'web.views.nuevo_usuario'),
+    url(r'^ingresar/$', 'web.views.ingresar'),
+    url(r'^privado/$', 'web.views.privado'),
+    url(r'^cerrar/$', 'web.views.cerrar'),
+    
     # url(r'^apuntes/', include('apuntes.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

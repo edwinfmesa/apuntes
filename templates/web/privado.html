@@ -1,0 +1,9 @@
+{% extends "web/base.html" %}
+{%block body%}		
+	<article class="esqred">
+		<h3>Bienvenido</h3>
+		<p>Hola {{ usuario.username|upper}}, </p>
+		<p>La ultima vez que te vimos por aqui fue: {{ usuario.last_login}}.</p>
+		<p>Eres miembro desde el {{ usuario.date_joined }} </p>
+	</article>
+{% endblock%}

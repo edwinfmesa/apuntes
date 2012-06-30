@@ -1,0 +1,19 @@
+{% extends "web/base.html" %}
+{% block style %}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/form.css" />
+{% endblock %}
+{% block jslink %}<script src=""></script>{% endblock %}
+{%block body%}		
+	
+	<article class="esqred"><p>Formulario de registro nuevos usuarios</p></article>
+	<article class="esqred" id="article_form">
+    		<div id="form">
+    			<h3>LLena el siguiente formulario para agregar un apunte.</h3>
+		    	<form name="Apuntes" action="" method="POST" >
+			    	{% csrf_token %}
+			    	<table>{{ formulario }}</table>
+			    	<input type="submit" name="submit" id="id_submit" class="submit"/>
+		    	</form>
+	    	</div>
+    </article>
+{% endblock%}

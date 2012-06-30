@@ -5,7 +5,8 @@
 		<meta charset="UTF-8" />
 		<link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/h5bp_start.css" />
 		<link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/base.css" />
-		{% block style %} {% endblock %}
+		{% block style %} <link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/base2.css" />
+		 {% endblock %}
 		<link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/h5bp_end.css" />
 		<script src="{{ STATIC_PREFIX }}web/js/libs/modernizr-2.0.6.min.js"></script>
 		{% block jslink %} {% endblock %}
@@ -14,7 +15,13 @@
 	</head>
 	<body>
 		<div id="container">
-			<header><h1>Apuntes - Python - Django - Php - ZF - CSS - etc </h1></header>
+			<header><h1>Apuntes - Python - Django - Php - ZF - CSS - 
+			{% if user.is_authenticated %}
+			<h1><a href="{% url web.views.privado  %}">{{ user.username }}</a> - <a href="{% url web.views.cerrar %}">cerrar</a></h1>
+			{% else %}
+			<h1><a href="{% url web.views.ingresar  %}">Login</a></h1>
+			{% endif %}
+			</h1></header>
 			<nav id="nav">
 				{% include "web/menu.html" %}
 			</nav>

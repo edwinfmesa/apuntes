@@ -1,0 +1,17 @@
+{% extends "web/base.html" %}
+{%block body%}		
+	<article class="esqred">
+		<h3>Ingresa el usuario y el password</h3>
+	</article>
+	<article class="esqred" id="article_form">
+    		<div id="form">
+    			<h3>LLena el siguiente formulario para agregar un apunte.</h3>
+		    	<form name="Apuntes" action="" method="POST" id="formulario">
+			    	{% csrf_token %}
+			    	<table>{{ formulario }}</table>
+			    	<input type="submit" name="submit" id="id_submit" class="submit"/>
+		    	</form>
+	    	</div>
+    </article>
+    <article>No estas registrado? <a href="{% url web.views.nuevo_usuario %}">Registrate!</a></article>
+{% endblock%}
