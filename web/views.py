@@ -11,9 +11,9 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
-#Configuaracion para enviar correo desde Gmail
-#from django.core.mail import EmailMultiAlternatives  #Enviamos HTML
-from django.core.mail import send_mail
+#Configuaracion para enviar correo
+from django.core.mail import EmailMultiAlternatives  #Enviamos HTML
+#from django.core.mail import send_mail
 
 
 #funcion basica que recibe una solicitud y carga un html
@@ -40,13 +40,13 @@ def home(request):
             query = apuntes(titulo= df['titulo'], fecha = datetime.datetime.now() , texto = df['texto']+' email: '+df['email'], )
             query.save()
             
-            #configuracion para enviar correo via GMAIL
-#            to_admin = 'edwinfmesa@hotmail.com'
-#            html_content = 'Informacion recibida <br><br> Mensaje <br><br>%s <br><br>Desde: %s'%(df['texto'],df['email'])
-#            msg = EmailMultiAlternatives('Correo de contacto %s'%(df['titulo']), html_content, 'from@server.com', [to_admin])
-#            msg.attach_alternative(html_content, 'text/html') #deffinimos el ccontenido como HTML
-#            msg.send() #Enviamos el correo
-            send_mail('Subject here', 'Here is the message.', 'edwinfmesa@gmail.com',['edwinfmesa@hotmail.com'], fail_silently=False)
+            #configuracion para enviar correo 
+            to_admin = 'edwinfmesa@gmail.com'
+            html_content = 'Se ha agregado un nuevo apunte: <br><br> %s <br><br><br>Desde: %s'%(df['texto'],df['email'])
+            msg = EmailMultiAlternatives('[Apuntes] %s'%(df['titulo']), html_content, 'admin@apuntes.sintramunicipio.com', [to_admin])
+            msg.attach_alternative(html_content, 'text/html') #deffinimos el ccontenido como HTML
+            msg.send() #Enviamos el correo
+#            send_mail('Subject here', 'Here is the message.', 'edwinfmesa@gmail.com',['edwinfmesa@hotmail.com'], fail_silently=False)
             
     else:
         df = {}
