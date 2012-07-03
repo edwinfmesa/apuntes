@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response
 from web.models import generales, apuntes
-from web.forms import Apuntes
+from django.contrib.auth.models import User
+from web.forms import Apuntes, RegisterForm
 from django.template import RequestContext #para hacer funcionar {% csrf_token %}
 import datetime
 from django.http import HttpResponseRedirect
@@ -15,6 +16,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMultiAlternatives  #Enviamos HTML
 #from django.core.mail import send_mail
 
+# import code for encoding urls and generating md5 hashes --  GRAVATAR
+import urllib, hashlib
 
 #funcion basica que recibe una solicitud y carga un html
 def home(request):
@@ -45,13 +48,26 @@ def home(request):
             html_content = 'Se ha agregado un nuevo apunte: <br><br> %s <br><br><br>Desde: %s'%(df['texto'],df['email'])
             msg = EmailMultiAlternatives('[Apuntes] %s'%(df['titulo']), html_content, 'admin@apuntes.sintramunicipio.com', [to_admin])
             msg.attach_alternative(html_content, 'text/html') #deffinimos el ccontenido como HTML
-            msg.send() #Enviamos el correo
+#            msg.send() #Enviamos el correo
 #            send_mail('Subject here', 'Here is the message.', 'edwinfmesa@gmail.com',['edwinfmesa@hotmail.com'], fail_silently=False)
             
     else:
         df = {}
         form = Apuntes()
-    ctx = {'datos':  p, "apuntes": q, 'form':form}
+    
+    #GRAVATAR
+    # Set your variables here
+    if request.user.is_authenticated():
+        email = request.user.email
+        default = "http://cms.myspacecdn.com/cms/Music%20Vertical/Common/Images/default_small.jpg"
+        size = 100
+        
+        # construct the url
+        gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
+        gravatar_url += urllib.urlencode({'d':default, 's':str(size)})
+    else:
+        gravatar_url = "/static/web/img/default.png"
+    ctx = {'datos':  p, "apuntes": q, 'form':form, 'gravatar_url': gravatar_url}
     ctx.update(df)
     return render_to_response('web/home.html', ctx ,
                               context_instance = RequestContext(request)) #RequestContext #para hacer funcionar {% csrf_token %}
@@ -71,12 +87,12 @@ def instalaciones(request):
 
 def nuevo_usuario(request):
     if request.method == "POST":
-        formulario = UserCreationForm(request.POST)
-        if formulario.is_valid:
+        formulario = RegisterForm(request.POST)
+        if formulario.is_valid():
             formulario.save()
             return HttpResponseRedirect('/')
     else:
-        formulario = UserCreationForm()
+        formulario = RegisterForm()
     return render_to_response('web/nuevo_usuario.html',{'formulario': formulario}, context_instance=RequestContext(request))
  
 def ingresar(request):
@@ -110,5 +126,9 @@ def cerrar(request):
     logout(request)
     return HttpResponseRedirect('/')                
         
+
+
+
+
 
                 

@@ -17,3 +17,8 @@ class apuntes(models.Model):
     
     def __unicode__(self):
         return "%s "%(self.titulo)
+    
+#    class Media:
+#        js = ('/satic/tinyemc/jscripts/tiny_mce/tiny_mce.js',
+##             '/static/js/admin.js'
+#             )

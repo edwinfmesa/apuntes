@@ -2,3 +2,4 @@
 *.project
 *.pydevproject
 apuntes/settings.py
+static/tiny_mce/*
