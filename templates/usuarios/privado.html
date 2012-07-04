@@ -1,10 +1,13 @@
 {% extends "web/base.html" %}
 {%block body%}		
-	<article class="esqred">
+
 		<h3>Bienvenido</h3>
+		<br>
+    	<div style="text-align: center;"><img src="{{ gravatar_url }}" width=100" height="100"/></div>
+    	<br />
 		<p>Hola {{ usuario.username|upper}}, </p>
 		<p>La ultima vez que te vimos por aqui fue: {{ usuario.last_login}}.</p>
 		<p>Eres miembro desde el {{ usuario.date_joined }} </p>
-	</article>
+
 {% endblock%}
 

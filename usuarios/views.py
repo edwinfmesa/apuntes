@@ -10,6 +10,9 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
+# import code for encoding urls and generating md5 hashes --  GRAVATAR
+import urllib, hashlib
+
 def nuevo_usuario(request):
     if request.method == "POST":
         formulario = RegisterForm(request.POST)
@@ -41,10 +44,25 @@ def ingresar(request):
         formulario = AuthenticationForm()   
     return render_to_response('usuarios/ingresar.html',{'formulario':formulario}, context_instance = RequestContext(request))
                 
+                
 @login_required(login_url='/usuarios/ingresar')
 def privado(request):
     usuario = request.user
-    return render_to_response('usuarios/privado.html',{'usuario':usuario}, context_instance = RequestContext(request))                    
+    #GRAVATAR
+    # Set your variables here
+    if request.user.is_authenticated():
+        email = request.user.email
+        default = "http://cms.myspacecdn.com/cms/Music%20Vertical/Common/Images/default_small.jpg"
+        size = 100
+        
+        # construct the url
+        gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
+        gravatar_url += urllib.urlencode({'d':default, 's':str(size)})
+    else:
+        gravatar_url = "/static/web/img/default.png"
+   
+    return render_to_response('usuarios/privado.html',{'usuario':usuario, 'gravatar_url': gravatar_url}, context_instance = RequestContext(request))                    
+                
                 
 @login_required(login_url='/usuarios/ingresar')
 def cerrar(request):
