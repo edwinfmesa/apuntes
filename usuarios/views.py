@@ -1,11 +1,11 @@
 from django.shortcuts import render_to_response
-from django.contrib.auth.models import User
-from web.forms import Apuntes, RegisterForm
+#from django.contrib.auth.models import User
+from usuarios.forms import RegisterForm
 from django.http import HttpResponseRedirect
 from django.template import RequestContext #para hacer funcionar {% csrf_token %}
 
 #Django Auth
-from django.contrib.auth.forms import UserCreationForm
+#from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
