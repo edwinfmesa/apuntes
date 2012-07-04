@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from usuarios.urls import usuarios_urls #agregar esta linea para incluir las URLS de usuarios
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -9,16 +10,7 @@ urlpatterns = patterns('',
     url(r'^enlaces/(?P<var>.+?)/?$', 'web.views.enlaces'),
     url(r'^instalaciones/', 'web.views.instalaciones'),
     url(r'^update/', 'github.views.update'),
-    url(r'^usuario/nuevo/?$', 'web.views.nuevo_usuario'),
-    url(r'^ingresar/$', 'web.views.ingresar'),
-    url(r'^privado/$', 'web.views.privado'),
-    url(r'^cerrar/$', 'web.views.cerrar'),
-    
-    # url(r'^apuntes/', include('apuntes.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
+    #urls externas
+    url('^usuarios/', include(usuarios_urls)), #incluye las urls para manejar los usuarios
     url(r'^admin/', include(admin.site.urls)), #incluye las urls de la aplicacion
 )

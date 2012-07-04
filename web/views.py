@@ -1,16 +1,10 @@
 from django.shortcuts import render_to_response
 from web.models import generales, apuntes
-from django.contrib.auth.models import User
-from web.forms import Apuntes, RegisterForm
+#from django.contrib.auth.models import User
+from web.forms import Apuntes  #, RegisterForm
 from django.template import RequestContext #para hacer funcionar {% csrf_token %}
 import datetime
-from django.http import HttpResponseRedirect
 
-#Django Auth
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required
 
 #Configuaracion para enviar correo
 from django.core.mail import EmailMultiAlternatives  #Enviamos HTML
@@ -77,54 +71,15 @@ def enlaces(request,var):
 #        contexto = {'nombre':var,'apellido': 'mesa salazar'}
 #    else:
     contexto = {'nombre':var,'apellido': 'mesa salazar'}
-    return render_to_response('web/enlaces.html', contexto )
+    return render_to_response('web/enlaces.html', contexto ,context_instance = RequestContext(request) )
 
 def enlaces2(request):
-    return render_to_response('web/enlaces.html')
+    return render_to_response('web/enlaces.html', None, context_instance = RequestContext(request))
 
 def instalaciones(request):
-    return render_to_response('web/instalaciones.html', None)
+    return render_to_response('web/instalaciones.html', None, context_instance = RequestContext(request))
 
-def nuevo_usuario(request):
-    if request.method == "POST":
-        formulario = RegisterForm(request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            return HttpResponseRedirect('/')
-    else:
-        formulario = RegisterForm()
-    return render_to_response('web/nuevo_usuario.html',{'formulario': formulario}, context_instance=RequestContext(request))
- 
-def ingresar(request):
-    if not request.user.is_anonymous():
-        return HttpResponseRedirect('/privado')
-    if request.method == 'POST':
-        formulario = AuthenticationForm(request.POST)     
-        if formulario.is_valid:
-            usuario = request.POST['username']
-            clave = request.POST['password']
-            acceso = authenticate(username=usuario, password=clave)  
-            if acceso is not None:
-                if acceso.is_active:
-                    login(request, acceso)
-                    return HttpResponseRedirect('/privado')
-                else:
-                    return render_to_response('web/noactivo.html', context_instance = RequestContext(request))
-            else:
-                return render_to_response('web/nousuario.html', context_instance = RequestContext(request))
-    else:
-        formulario = AuthenticationForm()   
-    return render_to_response('web/ingresar.html',{'formulario':formulario}, context_instance = RequestContext(request))
-                
-@login_required(login_url='/ingresar')
-def privado(request):
-    usuario = request.user
-    return render_to_response('web/privado.html',{'usuario':usuario}, context_instance = RequestContext(request))                    
-                
-@login_required(login_url='/ingresar')
-def cerrar(request):
-    logout(request)
-    return HttpResponseRedirect('/')                
+               
         
 
 

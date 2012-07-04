@@ -17,9 +17,9 @@
 		<div id="container">
 			<header><h1>Apuntes - Python - Django - Php - ZF - CSS - 
 			{% if user.is_authenticated %}
-			<h1><a href="/privado">{{ user.username }}</a> - <a href="{% url web.views.cerrar %}">cerrar</a></h1>
+			<h1><a href="{% url usuarios.views.privado %}">{{ user.username }}</a> - <a href="{% url usuarios.views.cerrar %}">cerrar</a></h1>
 			{% else %}
-			<h1><a href="{% url web.views.ingresar  %}">Login</a></h1>
+			<h1><a href="{% url usuarios.views.ingresar  %}">Login</a></h1>
 			{% endif %}
 			</h1></header>
 			<nav id="nav">
