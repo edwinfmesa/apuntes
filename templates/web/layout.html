@@ -24,9 +24,9 @@
                 </form>
                 
                 {% if user.is_authenticated %}
-				<a href="{% url usuarios.views.cerrar %}" class="sesion esqred"> &nbsp; cerrar  &nbsp;</a> <a href="{% url usuarios.views.privado %}" class="sesion esqred"> &nbsp; {{ user.username }}  &nbsp;</a>     
+					<a href="{% url usuarios.views.cerrar %}" class="sesion esqred"> &nbsp; cerrar  &nbsp;</a> <a href="{% url usuarios.views.privado %}" class="sesion esqred"> &nbsp; {{ user.username }}  &nbsp;</a>     
 				{% else %}
-				<a href="{% url usuarios.views.nuevo_usuario  %}" class="sesion esqred"> &nbsp; Registrarse  &nbsp;</a> <a href="{% url usuarios.views.ingresar  %}" class="sesion esqred"> &nbsp; Iniciar sesion  &nbsp;</a>
+					<a href="{% url usuarios.views.nuevo_usuario  %}" class="sesion esqred"> &nbsp; Registrarse  &nbsp;</a> <a href="{% url usuarios.views.ingresar  %}" class="sesion esqred"> &nbsp; Iniciar sesion  &nbsp;</a>
 				{% endif %}
                 
                 
@@ -42,15 +42,15 @@
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="{% url web.views.home%}"><span>Inicio</span></a></li>
-                        <li><a href="#"><span>Instalaciones</span></a></li>
-                        <li><a href="#"><span>Procedimientos</span></a></li>
-                        <li><a href="#"><span>Conceptos</span></a></li>
-                        <li><a href="#"><span>Diccionario</span></a></li>
-                        <li><a href="#"><span>Funcionamiento</span></a></li>
-                        <li><a href="#"><span>Algoritmos</span></a></li>
-                        <li><a href="#"><span>Enlaces</span></a></li>
-                        <li><a href="#"><span>Personales</span></a></li>
+                        <li><a href="{% url web.views.home%}" class="degradado_menu"><span>Inicio</span></a></li>
+                        <li><a href="#" class="degradado_menu"><span>Instalaciones</span></a></li>
+                        <li><a href="#" class="degradado_menu"><span>Procedimientos</span></a></li>
+                        <li><a href="#" class="degradado_menu"><span>Conceptos</span></a></li>
+                        <li><a href="#" class="degradado_menu"><span>Diccionario</span></a></li>
+                        <li><a href="#" class="degradado_menu"><span>Funcionamiento</span></a></li>
+                        <li><a href="#" class="degradado_menu"><span>Algoritmos</span></a></li>
+                        <li><a href="#" class="degradado_menu"><span>Enlaces</span></a></li>
+                        <li><a href="#" class="degradado_menu"><span>Personales</span></a></li>
                     </ul>
                 </nav>
             </section>
@@ -71,7 +71,7 @@
                 <section id="barra_lateral">
                     <article class="caja esqred6">
                         <div class="wrapper">
-                            <header class="header_caja esqsupred4">
+                            <header class="header_caja esqsupred4 degradado_cafe">
                                 Indicadores
                             </header>
                             <div class="body_caja" >
@@ -90,7 +90,7 @@
                     </article>
                     <article class="caja esqred6">
                         <div class="wrapper">
-                            <header class="header_caja esqsupred4" >
+                            <header class="header_caja esqsupred4 degradado_cafe" >
                                 Destacados esta semana
                             </header>
                             <div class="body_caja">
@@ -107,7 +107,7 @@
                     </article>
                     <article class="caja esqred6">
                         <div class="wrapper">
-                            <header class="header_caja esqsupred4" >
+                            <header class="header_caja esqsupred4 degradado_cafe" >
                                 Informacion relevante
                             </header>
                             <div class="body_caja">
@@ -121,7 +121,7 @@
 
             </div>
 
-            <footer class="esqred6"><div><h4 id="daiech" >&copy; Copiright 2012 - <a  href="http://es.daiech.com">Daiech.com</a></h4></div></footer>
+            <footer class="esqred6"><div><h4 id="daiech" ><a  href="http://twitter.com/edwinfmesa">@edwinfmesa</a> &nbsp; &copy; Copiright 2012 - <a  href="http://es.daiech.com">Daiech.com</a></h4></div></footer>
         </div>
         <script src="{{ STATIC_PREFIX }}web/js/libs/jquery-1.7.1.min.js"></script>
         <script type="text/javascript">
