@@ -213,8 +213,23 @@ footer {
 }
 
 #nav_menu ul li a:hover {
-    background-color: #468104; 
-    background-image: none;
+/*    background-color: #468104; */
+/*    background-image: none;*/
+    
+    /* navegadores sin soporte */
+    background-image: url('../img/fondo_degradado.png');
+    /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from( #94D160), to( #468104));
+/*     Safari 5.1+, Chrome 10+ */
+    background: -webkit-linear-gradient(top,  #468104, #94D160 );
+/*     Firefox 3.6+ */
+    background: -moz-linear-gradient(top,  #468104, #94D160);
+/*     Opera 11.10+ */
+    background: -o-linear-background(top,  #468104, #94D160);
+/*     IE 10 */
+    background: -ms-linear-background(top, #468104, #94D160 );
+/*     estándar */
+    background: linear-background(top,  #468104, #94D160 );
 }
 
 .cuerpo{
