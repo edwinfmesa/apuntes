@@ -18,7 +18,7 @@ def nuevo_usuario(request):
         formulario = RegisterForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/usuarios/ingresar')
     else:
         formulario = RegisterForm()
     return render_to_response('usuarios/nuevo_usuario.html',{'formulario': formulario}, context_instance=RequestContext(request))

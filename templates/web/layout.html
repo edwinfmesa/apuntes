@@ -1,0 +1,134 @@
+{% load static %} {% get_static_prefix as STATIC_PREFIX %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/h5bp_start.css" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/base.css" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/h5bp_end.css" />
+        <script src="{{ STATIC_PREFIX }}web/js/libs/modernizr-2.0.6.min.js"></script>
+        <title>Apuntes</title>
+    </head>
+    <body>
+        <header id="header_top" >
+            <nav id="nav_top" class="degradados esqsupred4">
+                <h1 style="display: none">Apuntes</h1>
+                <a href="#" class="esqred"> &nbsp; Apuntes:  &nbsp;</a>
+                <form id="search_form">
+                    <fieldset>
+                        <input type="text" name="buscar" placeholder="buscar" class=" esqred4"/>
+                        <button name="b_buscar " class="esqred4">
+                            <span class="MSIcon"></span>
+                        </button> 
+                    </fieldset>
+                </form>
+                
+                {% if user.is_authenticated %}
+				<a href="{% url usuarios.views.cerrar %}" class="sesion esqred"> &nbsp; cerrar  &nbsp;</a> <a href="{% url usuarios.views.privado %}" class="sesion esqred"> &nbsp; {{ user.username }}  &nbsp;</a>     
+				{% else %}
+				<a href="{% url usuarios.views.nuevo_usuario  %}" class="sesion esqred"> &nbsp; Registrarse  &nbsp;</a> <a href="{% url usuarios.views.ingresar  %}" class="sesion esqred"> &nbsp; Iniciar sesion  &nbsp;</a>
+				{% endif %}
+                
+                
+                
+            </nav>
+        </header>
+
+        <div id="container" class="esqred6">
+
+            <section id="nav_menu">
+                <div id="logo_menu">
+                    <img src="{{ STATIC_PREFIX }}web/img/apuntes.png" width="140" height="50"/> 
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="{% url web.views.home%}"><span>Inicio</span></a></li>
+                        <li><a href="#"><span>Instalaciones</span></a></li>
+                        <li><a href="#"><span>Procedimientos</span></a></li>
+                        <li><a href="#"><span>Conceptos</span></a></li>
+                        <li><a href="#"><span>Diccionario</span></a></li>
+                        <li><a href="#"><span>Funcionamiento</span></a></li>
+                        <li><a href="#"><span>Algoritmos</span></a></li>
+                        <li><a href="#"><span>Enlaces</span></a></li>
+                        <li><a href="#"><span>Personales</span></a></li>
+                    </ul>
+                </nav>
+            </section>
+            <div class="cuerpo">
+                <header id="header_body" class="esqred6">
+                    <div id="comentario_pri">
+                        <h2>Escribe y busca apuntes de programacion para tenerlos siempre a mano cuando los necesites</h2>
+                    </div>
+                    <div id="redes_soc">
+                        <a href="#"><img src="{{ STATIC_PREFIX }}web/img/facebook.png" width="50" height="50"/></a>
+                        <a href="#"><img src="{{ STATIC_PREFIX }}web/img/google.png" width="50" height="50"/></a>
+                        <a href="#"><img src="{{ STATIC_PREFIX }}web/img/twitter.png" width="50" height="50"/></a>
+                    </div>
+                </header>
+                <section id="muro">
+                    {% block muro %} {% endblock %}
+                </section>
+                <section id="barra_lateral">
+                    <article class="caja esqred6">
+                        <div class="wrapper">
+                            <header class="header_caja esqsupred4">
+                                Indicadores
+                            </header>
+                            <div class="body_caja" >
+                                <table class="tabla_indicadores">
+                                    <tr>
+                                        <td>Apuntes: <span class="indicadores_valor">54</span> </td>
+                                        <td> Usuarios: <span class="indicadores_valor">67</span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grupos: <span class="indicadores_valor">49</span>  </td>
+                                        <td> Visitas: <span class="indicadores_valor">100</span> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="caja esqred6">
+                        <div class="wrapper">
+                            <header class="header_caja esqsupred4" >
+                                Destacados esta semana
+                            </header>
+                            <div class="body_caja">
+                                <div class="img_set">
+                                    <div class="img_wrapper"><img src="{{ STATIC_PREFIX }}web/img/default.png" width="50" height="50"/> </div> 
+                                    <div class="img_wrapper"><img src="{{ STATIC_PREFIX }}web/img/default.png" width="50" height="50"/> </div>
+                                    <div class="img_wrapper"><img src="{{ STATIC_PREFIX }}web/img/default.png" width="50" height="50"/> </div>
+                                    <div class="img_wrapper"><img src="{{ STATIC_PREFIX }}web/img/default.png" width="50" height="50"/> </div>
+                                    <div class="img_wrapper"><img src="{{ STATIC_PREFIX }}web/img/default.png" width="50" height="50"/> </div>
+                                    <div class="img_wrapper"><img src="{{ STATIC_PREFIX }}web/img/default.png" width="50" height="50"/> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="caja esqred6">
+                        <div class="wrapper">
+                            <header class="header_caja esqsupred4" >
+                                Informacion relevante
+                            </header>
+                            <div class="body_caja">
+                                <p class="texto_informativo">
+                                    Este es el cuerpo de la caja aqui podria ir tranquilamente un texto grande que contenga algo de informacion o podria ir cualquier cosa
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+
+            </div>
+
+            <footer class="esqred6"><div><h4 id="daiech" >&copy; Copiright 2012 - <a  href="http://es.daiech.com">Daiech.com</a></h4></div></footer>
+        </div>
+        <script src="{{ STATIC_PREFIX }}web/js/libs/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                /* $("#tres").css('color','#FF00EE');
+                $("#tres").css('background-color','red'); */
+            });
+        </script>
+    </body>
+</html>

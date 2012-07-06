@@ -1,7 +1,8 @@
-{% extends "web/base.html" %}
-{%block body%}		
+{% extends "web/layout.html" %}
+{%block muro %}		
 	<article class="esqred">
 		<h3>El usuario no esta activo</h3>
-		<p>Contactate con el administrador para resolver el problema</p>
+		<p>Contactate con el administrador para resolver el problema  <a href="{% url usuarios.views.ingresar %}" >Volver</a></p><br />
+
 	</article>
 {% endblock%}

@@ -1,19 +1,18 @@
-{% extends "web/base.html" %}
-{% block style %}
-	<link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/form.css" />
-{% endblock %}
-{% block jslink %}<script src=""></script>{% endblock %}
-{%block body%}		
+{% extends "web/layout.html" %}
+{%block muro %}	
 	
-	<article class="esqred"><p>Formulario de registro nuevos usuarios</p></article>
-	<article class="esqred" id="article_form">
+	<div><p>Formulario de registro nuevos usuarios</p></div>
+	<div>
     		<div id="form">
-    			<h3>LLena el siguiente formulario para agregar un apunte.</h3>
+    			<h3 style="float:left; width: 200px;">LLena el siguiente formulario para crear una cuenta.</h3>
+		    	<div style="float: left; width: 300px;">
 		    	<form name="Apuntes" action="" method="POST" >
 			    	{% csrf_token %}
-			    	<table>{{ formulario }}</table>
-			    	<input type="submit" name="submit" id="id_submit" class="submit"/>
+			    	<table>{{ formulario }}
+			    	<tr ><td></td><td><input type="submit" name="submit" id="id_submit" class="submit"/></td></tr>
+			    	</table>
 		    	</form>
+		    	</div>
 	    	</div>
-    </article>
+    </div>
 {% endblock%}

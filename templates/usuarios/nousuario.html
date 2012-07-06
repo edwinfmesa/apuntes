@@ -1,7 +1,7 @@
-{% extends "web/base.html" %}
-{%block body%}		
+{% extends "web/layout.html" %}
+{%block muro %}		
 	<article class="esqred">
 		<h3>Error de acceso</h3>
-		<p>El usuario y el password no coinciden o no existen</p>
+		<p>Contactate con el administrador para resolver el problema  <a href="{% url usuarios.views.ingresar %}" >Volver</a></p><br />
 	</article>
 {% endblock%}
