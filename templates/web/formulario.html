@@ -1,0 +1,28 @@
+{% extends "web/layout.html" %}
+
+{% block style %}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/formulario.css" />
+{% endblock %}
+
+{% block muro%}
+	
+  	{% if info_enviado %}
+  		<header><h2>El Apunte ha sido Gueradado correctamente.<a href="{% url web.views.formulario %}">Agregar Otro</a></h2></header>
+  	{% else %}
+  	    <header class="esqred6" > <h2>LLena el siguiente formulario para agregar un apunte.</h2> </header>
+	    <article class="esqred" id="article_form">
+	    		<div id="formulario">
+			    	<form name="Apuntes" action="." method="POST" >
+				    	{% csrf_token %}
+				    	<table>{{ formulario }}</table>
+				    	<input type="submit" name="submit" id="id_submit" class="submit"/>
+			    	</form>
+		    	</div>
+	    	{% endif %}
+	    </article>
+{% endblock%}
+
+{% block js %}
+		<script src="{{ STATIC_PREFIX }}tiny_mce/tiny_mce.js"></script>
+		<script src="{{ STATIC_PREFIX }}js/textareas.js"></script>
+{% endblock %}

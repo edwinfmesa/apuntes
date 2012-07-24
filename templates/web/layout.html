@@ -1,11 +1,15 @@
 {% load static %} {% get_static_prefix as STATIC_PREFIX %}
+{% load mytags %}
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8" />
         <link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/h5bp_start.css" />
         <link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/base.css" />
+        {% block style %}{% endblock%}
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/base2.css" />
         <link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/h5bp_end.css" />
+        
         <script src="{{ STATIC_PREFIX }}web/js/libs/modernizr-2.0.6.min.js"></script>
         <title>Apuntes</title>
     </head>
@@ -124,11 +128,13 @@
             <footer class="esqred6"><div><h4 id="daiech" ><a  href="http://twitter.com/edwinfmesa">@edwinfmesa</a> &nbsp; &copy; Copiright 2012 - <a  href="http://es.daiech.com">Daiech.com</a></h4></div></footer>
         </div>
         <script src="{{ STATIC_PREFIX }}web/js/libs/jquery-1.7.1.min.js"></script>
+        {% block js %}{% endblock %}
         <script type="text/javascript">
             $(document).ready(function() {
                 /* $("#tres").css('color','#FF00EE');
                 $("#tres").css('background-color','red'); */
             });
         </script>
+        
     </body>
 </html>

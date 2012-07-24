@@ -1,14 +1,18 @@
 {% extends "web/layout.html" %}
-{%block muro%}		
-
+{%block muro%}	
+<article>	
+		<header><h3>LLena el siguiente formulario para iniciar sesion.</h3></header>
+		<div id="formulario">
     		<div id="form">
-    			<h3>LLena el siguiente formulario para iniciar sesion.</h3>
 		    	<form name="Apuntes" action="" method="POST" id="formulario">
 			    	{% csrf_token %}
 			    	<table>{{ formulario }}</table>
 			    	<p><input type="submit" name="submit" id="id_submit" class="submit"/></p>
 		    	</form>
 	    	</div>
+	    </div>
 <br />
 No estas registrado? <a href="{% url usuarios.views.nuevo_usuario %}">Registrate!</a>
+
+</article>
 {% endblock%}

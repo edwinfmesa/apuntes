@@ -1,0 +1,110 @@
+#formulario {
+	overflow: hidden;
+	width: 575px;
+	}
+	
+
+/*#muro {*/
+/*    color: #555555;*/
+/*    width: 580px;*/
+/*    float: left;*/
+/*        border: 1px solid green;*/
+/*    margin: 10px 10px auto auto;*/
+/*}*/
+
+#muro header {
+    padding: 10px;
+    border: 4px solid #94D160;
+    text-align: center;
+    background-color: rgba(95, 86, 41, 0.06);
+    overflow: hidden;
+}
+
+#muro h2 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 22px;
+    color: #666;
+}
+
+#muro article {
+    margin: 5px auto auto auto;
+    padding: 5px 0;
+    border: 1px solid #BBB;
+}
+
+#muro article h3 {
+    font-size: 18px;
+    float: left; 
+    margin: 5px auto 10px 5px;
+    width: 260px;
+}
+
+#muro article .fecha {
+    float: right;
+    margin: 8px 5px auto auto;
+    width: 200px
+}
+
+#muro article nav span{
+    float: right;
+    margin: 0px 5px auto auto;
+}
+
+#muro article p {
+    clear: both; 
+    margin: 0px 5px 5px 10px;
+}
+
+.img_apunte {
+    padding: 8px;
+    width: 60px;
+    float: left;
+    text-align: center;
+
+}
+.img_apunte img {
+    display: block;
+    margin: auto;
+}
+.img_apunte h4{
+    margin: 5px 0 0 0;
+    text-align: center;
+    padding:0px;
+    font-size: 10px;
+}
+
+.img_apunte a{
+    margin: auto;
+    text-align: center;
+}
+
+.intro_apunte {
+    float: left;
+    width: 500px
+}
+.intro_apunte .des_apunte {
+    width: 250px;
+    height: 40px;
+    float: left;
+}
+.intro_apunte nav {
+    /*    background-color: #94D160; */
+    width: 240px;
+    padding-top: 10px;
+    padding-right: 10px;
+    float: left;
+    height: 35px;
+}
+
+.tipo_apunte {
+    border: 1px solid #FFFFFF;
+    color: white;
+    background-color: #59911B;
+    padding: 4px;
+}
+
+.tipo_apunte a {
+    color: white;
+    font-weight: bold;
+}

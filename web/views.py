@@ -3,6 +3,8 @@ from web.models import generales, apuntes
 #from django.contrib.auth.models import User
 from web.forms import Apuntes  #, RegisterForm
 from django.template import RequestContext #para hacer funcionar {% csrf_token %}
+
+from django.contrib.auth.decorators import login_required # privacidad de formulario
 import datetime
 
 
@@ -15,12 +17,31 @@ from django.core.mail import EmailMultiAlternatives  #Enviamos HTML
 def home(request):
     p = generales.objects.order_by("-fecha")
     q = apuntes.objects.order_by("-fecha")
-    #formularios
+    
+    ctx = {'datos':  p, "apuntes": q}
+#    ctx.update(df)
+    return render_to_response('web/home.html', ctx ,
+                              context_instance = RequestContext(request)) #RequestContext #para hacer funcionar {% csrf_token %}
+    
+
+def enlaces(request,var):
+#    if var != None:
+#        contexto = {'nombre':var,'apellido': 'mesa salazar'}
+#    else:
+    contexto = {'nombre':var,'apellido': 'mesa salazar'}
+    return render_to_response('web/enlaces.html', contexto ,context_instance = RequestContext(request) )
+
+def enlaces2(request):
+    return render_to_response('web/enlaces.html', None, context_instance = RequestContext(request))
+
+def instalaciones(request):
+    return render_to_response('web/instalaciones.html', None, context_instance = RequestContext(request))
+
+@login_required(login_url='/usuarios/ingresar')
+def formulario(request):
+        #formularios
     info_enviado = False #si se envia el formaulario
-#    email = ""
-#    titulo = ""
-#    texto = ""
-    df = ""
+    df = {}
     query = ""
     if request.method == "POST":
         form = Apuntes(request.POST)
@@ -45,28 +66,8 @@ def home(request):
     else:
         df = {}
         form = Apuntes()
-        
-    ctx = {'datos':  p, "apuntes": q, 'form':form}
-    ctx.update(df)
-    return render_to_response('web/home.html', ctx ,
-                              context_instance = RequestContext(request)) #RequestContext #para hacer funcionar {% csrf_token %}
-    
-
-def enlaces(request,var):
-#    if var != None:
-#        contexto = {'nombre':var,'apellido': 'mesa salazar'}
-#    else:
-    contexto = {'nombre':var,'apellido': 'mesa salazar'}
-    return render_to_response('web/enlaces.html', contexto ,context_instance = RequestContext(request) )
-
-def enlaces2(request):
-    return render_to_response('web/enlaces.html', None, context_instance = RequestContext(request))
-
-def instalaciones(request):
-    return render_to_response('web/instalaciones.html', None, context_instance = RequestContext(request))
-
-               
-        
+    df.update({'formulario': form})
+    return render_to_response('web/formulario.html', df, context_instance = RequestContext(request))
 
 
 
