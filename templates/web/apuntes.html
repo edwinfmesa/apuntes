@@ -14,12 +14,12 @@
 	{% for apunte in apuntes %}
 	<article class="esqred6" style="overflow:hidden">
 	    <div class="img_apunte link_negros"> 
-<!--	        <img src="{{ STATIC_PREFIX }}web/img/default.png" width="50" height="50"/>-->
-			{% show_gravatar apunte.user.email 50 %}
+	        <img src="{{ apunte.user.email|showgravatar:'50' }}" width="50" height="50"/>
+			
 	        <h4><a href="#">{{ apunte.user.username }}</a></h4>
 	    </div>
 	    <div class="intro_apunte">
-	        <h3 class="link_negros"><a href="#">{{ apunte.titulo|truncatechars:20 }}</a></h3>  
+	        <h3 class="link_negros"><a href="/apuntes/{{ apunte.slug }}/{{ apunte.id }}">{{ apunte.titulo|truncatechars:20 }}</a></h3>  
 	        <span class="fecha">{{ apunte.fecha }}</span>
 	        <div class="des_apunte">
 	            <p class="link_negros">

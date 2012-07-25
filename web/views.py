@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response
 from web.models import Generales, Apuntes
 #from django.contrib.auth.models import User
 from web.forms import ApuntesForm  #, RegisterForm
-from django.template import RequestContext #para hacer funcionar {% csrf_token %}
+from django.template import RequestContext, context, loader #para hacer funcionar {% csrf_token %}
 
 from django.contrib.auth.decorators import login_required # privacidad de formulario
 import datetime

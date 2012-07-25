@@ -19,8 +19,8 @@
 	</header>
 	<article class="esqred6" style="overflow:hidden">
 	    <div class="img_apunte link_negros"> 
-<!--	        <img src="{{ STATIC_PREFIX }}web/img/default.png" width="50" height="50"/>-->
-			{% show_gravatar apunte.user.email 50 %}
+	        <img src="{{ apunte.user.email|showgravatar:'50' }}" width="50" height="50"/>
+			
 	        <h4><a href="#">{{ apunte.user.username }}</a></h4>
 	    </div>
 	    <div class="intro_apunte">
