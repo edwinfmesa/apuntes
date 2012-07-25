@@ -1,5 +1,5 @@
 {% load static %} {% get_static_prefix as STATIC_PREFIX %}
-{% load mytags %}
+{% load mytags  %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -44,7 +44,7 @@
                 <div id="logo_menu">
                     <img src="{{ STATIC_PREFIX }}web/img/apuntes.png" width="140" height="50"/> 
                 </div>
-                {% show_gravatar "edwinfmesa@hotmail.com" 50 %}
+                {% showgravatar "edwinfmesa@hotmail.com" 50 %}
                 <nav>
                     <ul>
                         <li><a href="{% url web.views.home%}" class="degradado_menu"><span>Inicio</span></a></li>
