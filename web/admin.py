@@ -1,5 +1,5 @@
 from django.contrib import admin
-from web.models import generales, apuntes
+from web.models import Generales, Apuntes
 from django.conf import settings
 
 class ApuntesAdmin(admin.ModelAdmin):
@@ -18,6 +18,6 @@ class ApuntesAdmin(admin.ModelAdmin):
 
 
 #registramos la tabla generales
-admin.site.register(generales)
-admin.site.register(apuntes, ApuntesAdmin)
+admin.site.register(Generales)
+admin.site.register(Apuntes, ApuntesAdmin)
 

@@ -1,0 +1,49 @@
+{% extends "web/layout.html" %}
+{% load mytags %}
+
+{% block style %} 
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}web/css/home.css" />
+	<style>
+		#texto {
+			padding: 10px;
+		}
+	</style>
+	{% include "web/SH_CSS.html"%}
+{% endblock %}
+
+{% block muro %}
+	<header class="esqred6">
+	    <h2>
+	        Ultimos Apuntes agregados
+	    </h2>
+	</header>
+	<article class="esqred6" style="overflow:hidden">
+	    <div class="img_apunte link_negros"> 
+<!--	        <img src="{{ STATIC_PREFIX }}web/img/default.png" width="50" height="50"/>-->
+			{% show_gravatar apunte.user.email 50 %}
+	        <h4><a href="#">{{ apunte.user.username }}</a></h4>
+	    </div>
+	    <div class="intro_apunte">
+	        <h3 class="link_negros"><a href="#">{{ apunte.titulo|truncatechars:20 }}</a></h3>  
+	        <span class="fecha">{{ apunte.fecha }}</span>
+	        <div class="des_apunte">
+	            <p class="link_negros">
+	                Categoria: <a href="#">instalaciones</a><br />
+	                Grupo: <a href="#">Mi grupo</a>
+	            </p>
+	        </div>
+	        <nav>
+	            <span class="tipo_apunte esqred4 link_blanco" ><a href="#">Compartir</a></span>
+	            <span class="tipo_apunte esqred4 link_blanco" ><a href="#">Calificar</a></span>
+	            <span class="tipo_apunte esqred4 link_blanco" ><a href="#">ver</a></span>
+	        </nav>
+	    </div>
+	</article>
+	<article >
+		<div id="texto">{{ apunte.texto|safe }}</div>
+	</article>
+{% endblock %}
+
+{% block js %}
+	{% include "web/SH_JS.html"%}
+{% endblock %}

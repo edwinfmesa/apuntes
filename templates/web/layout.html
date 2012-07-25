@@ -28,7 +28,7 @@
                 </form>
                 
                 {% if user.is_authenticated %}
-					<a href="{% url usuarios.views.cerrar %}" class="sesion esqred"> &nbsp; cerrar  &nbsp;</a> <a href="{% url usuarios.views.privado %}" class="sesion esqred"> &nbsp; {{ user.username }}  &nbsp;</a>     
+					<a href="{% url usuarios.views.cerrar %}" class="sesion esqred"> &nbsp; cerrar  &nbsp;</a> <a href="{% url usuarios.views.privado %}" class="sesion esqred"> {% show_gravatar user.email 20 %}&nbsp; {{ user.username }}  &nbsp;</a>     
 				{% else %}
 					<a href="{% url usuarios.views.nuevo_usuario  %}" class="sesion esqred"> &nbsp; Registrarse  &nbsp;</a> <a href="{% url usuarios.views.ingresar  %}" class="sesion esqred"> &nbsp; Iniciar sesion  &nbsp;</a>
 				{% endif %}
@@ -54,14 +54,16 @@
                         <li><a href="#" class="degradado_menu"><span>Funcionamiento</span></a></li>
                         <li><a href="#" class="degradado_menu"><span>Algoritmos</span></a></li>
                         <li><a href="#" class="degradado_menu"><span>Enlaces</span></a></li>
-                        <li><a href="#" class="degradado_menu"><span>Personales</span></a></li>
+                        <li><a href="#" class="degradado_menu"><span>Ideas</span></a></li>
+                        <li><a href="#" class="degradado_menu"><span>Generales</span></a></li>
+                        <li><a href="{% url web.views.apunte %}" class="degradado_menu"><span>Personales</span></a></li>
                     </ul>
                 </nav>
             </section>
             <div class="cuerpo">
                 <header id="header_body" class="esqred6">
                     <div id="comentario_pri">
-                        <h2>Escribe y busca apuntes de programacion para tenerlos siempre a mano cuando los necesites</h2>
+                        <h2 class="link_negros">Escribe y busca apuntes de programacion para tenerlos siempre a mano  <a href="{% url web.views.formulario %}">(agregar apunte personal)</a></h2> <!--  cuando los necesites -->
                     </div>
                     <div id="redes_soc">
                         <a href="#"><img src="{{ STATIC_PREFIX }}web/img/facebook.png" width="50" height="50"/></a>
