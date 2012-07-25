@@ -5,7 +5,8 @@ import urllib, hashlib
 register = template.Library()
 
 #@register.inclusion_tag('templatetags/gravatar.html')
-@register.filter(name='showgravatar')
+#@register.filter(name='showgravatar')
+
 def showgravatar(email, size):
     default = "http://cms.myspacecdn.com/cms/Music%20Vertical/Common/Images/default_small.jpg"
 
@@ -16,6 +17,7 @@ def showgravatar(email, size):
         'size': str(size)
     })
     return url
+register.filter('showgravatar', showgravatar)
     #return {'gravatar': {'url': url, 'size': size}}
 
 
