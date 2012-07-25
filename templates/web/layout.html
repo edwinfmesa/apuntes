@@ -1,5 +1,5 @@
 {% load static %} {% get_static_prefix as STATIC_PREFIX %}
-{% load mytags  %}
+{% load abcfilters  %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,7 +30,7 @@
                 {% if user.is_authenticated %}
 					<a href="{% url usuarios.views.cerrar %}" class="sesion esqred"> &nbsp; cerrar  &nbsp;</a> <a href="{% url usuarios.views.privado %}" class="sesion esqred"> 
 					<div class="gravatar esqsupred2">
-					    <img src="{{ user.email|showgravatar:'20'}}"
+					    <img src=""
 					        width="20" height="20" />
 					</div>
 					 &nbsp; {{ user.username }}  &nbsp;
@@ -51,6 +51,7 @@
                     <img src="{{ STATIC_PREFIX }}web/img/apuntes.png" width="140" height="50"/> 
                 </div>
                 <nav>
+                {{ user.email|showgravatar:'20'}}
                     <ul>
                         <li><a href="{% url web.views.home%}" class="degradado_menu"><span>Inicio</span></a></li>
                         <li><a href="#" class="degradado_menu"><span>Instalaciones</span></a></li>
