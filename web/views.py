@@ -20,8 +20,7 @@ def home(request):
     
     ctx = {'datos':  p, "apuntes": q}
 #    ctx.update(df)
-    return render_to_response('web/home.html', ctx ,
-                              context_instance = RequestContext(request)) #RequestContext #para hacer funcionar {% csrf_token %}
+    return render_to_response('web/home.html', ctx ,context_instance = RequestContext(request)) 
     
 
 def enlaces(request,var):
