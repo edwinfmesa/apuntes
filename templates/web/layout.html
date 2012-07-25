@@ -28,7 +28,7 @@
                 </form>
                 
                 {% if user.is_authenticated %}
-					<a href="{% url usuarios.views.cerrar %}" class="sesion esqred"> &nbsp; cerrar  &nbsp;</a> <a href="{% url usuarios.views.privado %}" class="sesion esqred"> {% show_gravatar user.email 20 %} &nbsp; {{ user.username }}  &nbsp;</a>     
+					<a href="{% url usuarios.views.cerrar %}" class="sesion esqred"> &nbsp; cerrar  &nbsp;</a> <a href="{% url usuarios.views.privado %}" class="sesion esqred">  &nbsp; {{ user.username }}  &nbsp;</a>     
 				{% else %}
 					<a href="{% url usuarios.views.nuevo_usuario  %}" class="sesion esqred"> &nbsp; Registrarse  &nbsp;</a> <a href="{% url usuarios.views.ingresar  %}" class="sesion esqred"> &nbsp; Iniciar sesion  &nbsp;</a>
 				{% endif %}
@@ -44,6 +44,7 @@
                 <div id="logo_menu">
                     <img src="{{ STATIC_PREFIX }}web/img/apuntes.png" width="140" height="50"/> 
                 </div>
+                {% show_gravatar user.email 50 %}
                 <nav>
                     <ul>
                         <li><a href="{% url web.views.home%}" class="degradado_menu"><span>Inicio</span></a></li>
