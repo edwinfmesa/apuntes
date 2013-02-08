@@ -9,6 +9,7 @@ from django.template import RequestContext #para hacer funcionar {% csrf_token %
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
 
 # import code for encoding urls and generating md5 hashes --  GRAVATAR
 import urllib, hashlib
@@ -17,7 +18,19 @@ def nuevo_usuario(request):
     if request.method == "POST":
         formulario = RegisterForm(request.POST)
         if formulario.is_valid():
-            formulario.save()
+            email_list = []
+#                for relation in relations:
+                    #print "Nombre %s Correo %s, fecha %s"%(relation.id_user.username,relation.id_user.email,  str(datetime.datetime.strftime(make_naive(df['date_reunion'], get_default_timezone()), "%Y-%m-%d %I:%M %p")))
+            email_user = formulario.cleaned_data['email']
+            name_user = formulario.cleaned_data['username']  
+            email_list.append(str(email_user) + ",")
+            try:
+                title = "Haz creado una nueva cuenta en Actarium"
+                contenido = "Nombre de usuario: <strong>"+str(name_user)+"</strong>"
+                sendEmail(email_list, title, contenido)
+            except Exception, e:
+                print "Exception mail: %s" % e
+#            formulario.save()
             return HttpResponseRedirect('/usuarios/ingresar')
     else:
         formulario = RegisterForm()
@@ -68,3 +81,13 @@ def privado(request):
 def cerrar(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+def sendEmail(mail_to, titulo, contenido):
+    contenido = contenido + "\n" + "<br><br><p style='color:gray'>Mensaje enviado por <a style='color:gray' href='http://daiech.com'>Daiech</a>. <br><br> Escribenos en twitter <a href='http://twitter.com/Actarium'>@Actarium</a> - <a href='http://twitter.com/Daiech'>@Daiech</a></p><br><br>"
+    try:
+        correo = EmailMessage(titulo, contenido, 'Actarium <no-reply@daiech.com>', mail_to)
+        correo.content_subtype = "html"
+        correo.send()
+    except Exception, e:
+        print e
+
