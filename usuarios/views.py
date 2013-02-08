@@ -115,9 +115,9 @@ def activate_account_now(activation_key):
         activation_obj = activation_keys.objects.get(activation_key = activation_key)
     except  Exception, e:
         return False
-    print activation_obj
+#    print activation_obj
     if not(activation_obj.is_expired):
-        user = User.objects.get(email=activation_obj.email)
+        user = User.objects.get(pk=activation_obj.email)
         user.is_active = True
         user.save()
         return True
