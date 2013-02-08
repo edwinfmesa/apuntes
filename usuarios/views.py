@@ -122,6 +122,8 @@ def activate_account_now(request, activation_key):
         user.save()
         user.backend = 'django.contrib.auth.backends.ModelBackend'
         login(request, user)
+        activation_obj.is_expired = True
+        activation_obj.save()
         return True
     else: 
         return False
