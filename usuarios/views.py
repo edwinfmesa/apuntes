@@ -10,27 +10,33 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
-
+from django.utils.hashcompat import sha_constructor
 # import code for encoding urls and generating md5 hashes --  GRAVATAR
-import urllib, hashlib
+import urllib, hashlib, random
 
 def nuevo_usuario(request):
     if request.method == "POST":
         formulario = RegisterForm(request.POST)
         if formulario.is_valid():
             email_list = []
-#                for relation in relations:
-                    #print "Nombre %s Correo %s, fecha %s"%(relation.id_user.username,relation.id_user.email,  str(datetime.datetime.strftime(make_naive(df['date_reunion'], get_default_timezone()), "%Y-%m-%d %I:%M %p")))
             email_user = formulario.cleaned_data['email']
-            name_user = formulario.cleaned_data['username']  
+            name_newuser = formulario.cleaned_data['username']
+            salt = sha_constructor(str(random.random())).hexdigest()[:5]
+            activation_key = sha_constructor(salt+email_user).hexdigest()            
+            new_user = formulario.save()
+            new_user.is_active = False
+            new_user.save()
+            from models import activation_keys
+            activation_keys(id_user=new_user, email=email_user, activation_key= activation_key).save()
+            
             email_list.append(str(email_user) + ",")
             try:
-                title = "Haz creado una nueva cuenta en Actarium"
-                contenido = "Nombre de usuario: <strong>"+str(name_user)+"</strong>"
+                title = "Bienvenido a DiaryCodes"
+                contenido = "<strong>"+str(name_newuser)+"</strong> <br ><br> Te damos la bienvenida a DiaryCodes, solo falta un paso para activar tu cuenta. <br > Ingresa al siguiente link para activar tu cuenta: <a href='http://www.diarycodes.daiech.com/usuarios/activate/"+activation_key+"' >http://diarycodes.daiech.com/usuarios/activate/"+activation_key+"</a>"
+                print contenido
                 sendEmail(email_list, title, contenido)
             except Exception, e:
                 print "Exception mail: %s" % e
-#            formulario.save()
             return HttpResponseRedirect('/usuarios/ingresar')
     else:
         formulario = RegisterForm()
@@ -82,6 +88,7 @@ def cerrar(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+
 def sendEmail(mail_to, titulo, contenido):
     contenido = contenido + "\n" + "<br><br><p style='color:gray'>Mensaje enviado por <a style='color:gray' href='http://daiech.com'>Daiech</a>. <br><br> Escribenos en twitter <a href='http://twitter.com/Actarium'>@Actarium</a> - <a href='http://twitter.com/Daiech'>@Daiech</a></p><br><br>"
     try:
@@ -90,4 +97,30 @@ def sendEmail(mail_to, titulo, contenido):
         correo.send()
     except Exception, e:
         print e
+
+
+def activate_account(request,activation_key):
+    if  not(activate_account_now(activation_key)== False):
+#        print "La cuenta ha sido activada satisfactoriamente correo: "
+        return render_to_response('usuarios/account_actived.html')
+    else:
+#        print "La cuenta no se ha activado."
+        return render_to_response('usuarios/invalid_link.html')
+    
+    
+def activate_account_now(activation_key):
+    from models import activation_keys
+    from django.contrib.auth.models import User
+    try:
+        activation_obj = activation_keys.objects.get(activation_key = activation_key)
+    except  Exception, e:
+        return False
+    print activation_obj
+    if not(activation_obj.is_expired):
+        user = User.objects.get(id=activation_obj.id_user.pk)
+        user.is_active = True
+        user.save()
+        return True
+    else: 
+        return False
 
