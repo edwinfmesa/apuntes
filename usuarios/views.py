@@ -34,7 +34,7 @@ def nuevo_usuario(request):
                 title = "Bienvenido a DiaryCodes"
                 contenido = "<strong>"+str(name_newuser)+"</strong> <br ><br> Te damos la bienvenida a DiaryCodes, solo falta un paso para activar tu cuenta. <br > Ingresa al siguiente link para activar tu cuenta: <a href='http://www.diarycodes.daiech.com/usuarios/activate/"+activation_key+"' >http://diarycodes.daiech.com/usuarios/activate/"+activation_key+"</a>"
                 print contenido
-                sendEmail(email_list, title, contenido)
+#                sendEmail(email_list, title, contenido)
             except Exception, e:
                 print "Exception mail: %s" % e
             return HttpResponseRedirect('/usuarios/ingresar')
@@ -100,15 +100,15 @@ def sendEmail(mail_to, titulo, contenido):
 
 
 def activate_account(request,activation_key):
-    if  not(activate_account_now(activation_key)== False):
+    if  not(activate_account_now(request,activation_key)== False):
 #        print "La cuenta ha sido activada satisfactoriamente correo: "
-        return render_to_response('usuarios/account_actived.html')
+        return render_to_response('usuarios/account_actived.html',{},context_instance = RequestContext(request))
     else:
 #        print "La cuenta no se ha activado."
         return render_to_response('usuarios/invalid_link.html')
     
     
-def activate_account_now(activation_key):
+def activate_account_now(request, activation_key):
     from models import activation_keys
     from django.contrib.auth.models import User
     try:
@@ -120,6 +120,8 @@ def activate_account_now(activation_key):
         user = User.objects.get(id=activation_obj.id_user.pk)
         user.is_active = True
         user.save()
+        user.backend = 'django.contrib.auth.backends.ModelBackend'
+        login(request, user)
         return True
     else: 
         return False
