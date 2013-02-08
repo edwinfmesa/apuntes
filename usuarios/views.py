@@ -32,12 +32,11 @@ def nuevo_usuario(request):
             email_list.append(str(email_user) + ",")
             try:
                 title = "Bienvenido a DiaryCodes"
-                contenido = "<strong>"+str(name_newuser)+"</strong> <br ><br> Te damos la bienvenida a DiaryCodes, solo falta un paso para activar tu cuenta. <br > Ingresa al siguiente link para activar tu cuenta: <a href='http://actarium.com/activate/'"+activation_key+"'>http://actarium.com/activate/'"+activation_key+"'</a>"
+                contenido = "<strong>"+str(name_newuser)+"</strong> <br ><br> Te damos la bienvenida a DiaryCodes, solo falta un paso para activar tu cuenta. <br > Ingresa al siguiente link para activar tu cuenta: <a href='http://www.diarycodes.daiech.com/usuarios/activate/"+activation_key+"' >http://diarycodes.daiech.com/usuarios/activate/"+activation_key+"</a>"
                 print contenido
                 sendEmail(email_list, title, contenido)
             except Exception, e:
                 print "Exception mail: %s" % e
-#            
             return HttpResponseRedirect('/usuarios/ingresar')
     else:
         formulario = RegisterForm()
@@ -89,6 +88,7 @@ def cerrar(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+
 def sendEmail(mail_to, titulo, contenido):
     contenido = contenido + "\n" + "<br><br><p style='color:gray'>Mensaje enviado por <a style='color:gray' href='http://daiech.com'>Daiech</a>. <br><br> Escribenos en twitter <a href='http://twitter.com/Actarium'>@Actarium</a> - <a href='http://twitter.com/Daiech'>@Daiech</a></p><br><br>"
     try:
@@ -98,6 +98,7 @@ def sendEmail(mail_to, titulo, contenido):
     except Exception, e:
         print e
 
+
 def activate_account(request,activation_key):
     if  not(activate_account_now(activation_key)== False):
 #        print "La cuenta ha sido activada satisfactoriamente correo: "
@@ -105,7 +106,6 @@ def activate_account(request,activation_key):
     else:
 #        print "La cuenta no se ha activado."
         return render_to_response('usuarios/invalid_link.html')
-    
     
     
 def activate_account_now(activation_key):
@@ -117,7 +117,7 @@ def activate_account_now(activation_key):
         return False
 #    print activation_obj
     if not(activation_obj.is_expired):
-        user = User.objects.get(pk=activation_obj.email)
+        user = User.objects.get(id=activation_obj.id_user.pk)
         user.is_active = True
         user.save()
         return True
