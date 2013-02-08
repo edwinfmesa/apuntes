@@ -33,8 +33,8 @@ def nuevo_usuario(request):
             try:
                 title = "Bienvenido a DiaryCodes"
                 contenido = "<strong>"+str(name_newuser)+"</strong> <br ><br> Te damos la bienvenida a DiaryCodes, solo falta un paso para activar tu cuenta. <br > Ingresa al siguiente link para activar tu cuenta: <a href='http://www.diarycodes.daiech.com/usuarios/activate/"+activation_key+"' >http://diarycodes.daiech.com/usuarios/activate/"+activation_key+"</a>"
-                print contenido
-#                sendEmail(email_list, title, contenido)
+#                print contenido
+                sendEmail(email_list, title, contenido)
             except Exception, e:
                 print "Exception mail: %s" % e
             return HttpResponseRedirect('/usuarios/ingresar')
