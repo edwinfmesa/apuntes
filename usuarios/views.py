@@ -14,7 +14,28 @@ from django.utils.hashcompat import sha_constructor
 # import code for encoding urls and generating md5 hashes --  GRAVATAR
 import urllib, hashlib, random
 
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
+from django.template import Context
+
+def sendEmailTest():
+    username="Edwin Mesa"
+    plaintext = get_template('usuarios/emailtest.txt')
+    htmly     = get_template('usuarios/emailtest.html')
+    d = Context({ 'username': username })
+    subject, from_email, to = 'hello', 'Actarium <no-reply@daiech.com>', 'emesa@daiech.com'
+    text_content = plaintext.render(d)
+    html_content = htmly.render(d)
+    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
+    
+
 def nuevo_usuario(request):
+    try:
+        sendEmailTest()
+    except:
+        print "Error sending email"
     if request.method == "POST":
         formulario = RegisterForm(request.POST)
         if formulario.is_valid():
@@ -37,7 +58,7 @@ def nuevo_usuario(request):
                 sendEmail(email_list, title, contenido)
             except Exception, e:
                 print "Exception mail: %s" % e
-            return HttpResponseRedirect('/usuarios/ingresar')
+            return HttpResponseRedirect('/usuarios/ingresar',{},context_instance=RequestContext(request))
     else:
         formulario = RegisterForm()
     return render_to_response('usuarios/nuevo_usuario.html',{'formulario': formulario}, context_instance=RequestContext(request))
@@ -105,7 +126,7 @@ def activate_account(request,activation_key):
         return render_to_response('usuarios/account_actived.html',{},context_instance = RequestContext(request))
     else:
 #        print "La cuenta no se ha activado."
-        return render_to_response('usuarios/invalid_link.html')
+        return render_to_response('usuarios/invalid_link.html',{},context_instance = RequestContext(request))
     
     
 def activate_account_now(request, activation_key):
